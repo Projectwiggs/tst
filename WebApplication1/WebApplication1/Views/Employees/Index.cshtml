@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TST.EF.TSTEmployee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="article">
+    <h2>Staff</h2>
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+    {
+        <p class="halfbar-left">
+            <a href="/Employees/Create"><span class="glyphicon glyphicon-plus text-smaller"></span><span class="glyphicon glyphicon-user text-larger"></span></a>
+        </p>
+        <div class="clear"></div>
+    }
+
+    @foreach (var item in Model)
+    {
+        if (User.IsInRole("Admin") || item.IsActive == true)
+        {
+            <div class="employee" id="@item.EmployeeID">
+                <a class="overlay" href="@Url.Content("~/Employees/Details?RawID=" + item.EmployeeID)"><div>Go To Profile</div></a>
+                <div class="employee-img">
+                    <img src="@Url.Content("~/Content/images/employees/" + item.EmpPhoto)" class="@(item.IsActive ? "" : "greyscale")" />
+                </div>
+                <h4>@item.FullName</h4>
+                <h6>@item.Email</h6>
+                <p>@(item.IsActive ? item.JobTitle : "Inactive")</p>
+            </div>
+        }
+
+    }
+
+    <div class="clear"></div>
+</div>

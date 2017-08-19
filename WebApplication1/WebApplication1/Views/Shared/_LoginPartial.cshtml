@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <li>@User.Identity.Name</li>
+        <li>
+            <div class="dropdown">
+                <a class="dropdown" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span id="empImageCon"><img id="empImage" src="" /></span><span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                    <li>@Html.ActionLink("My Account", "Details", "Employees", new { RawID = User.Identity.GetUserId() }, htmlAttributes: null)</li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+                </ul>
+            </div>
+        </li>
+    }
+}
+else
+{
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: null)</li>
+}
+<script>
+    $.ajax({
+        url: "/Home/GetEmpPicture?email=@User.Identity.Name",
+        success: function (data) {
+            //display the new note info at the bottom of the notes div. There is not formatting here. UI
+            //is unaware of what is happening
+            console.log(data)
+            document.getElementById("empImage").src = "/Content/images/employees/" + data;
+        }
+    })
+</script>

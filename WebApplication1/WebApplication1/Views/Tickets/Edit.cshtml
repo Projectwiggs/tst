@@ -1,0 +1,143 @@
+﻿@model TST.EF.TSTTicket
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="article" id="notes">
+    <h4>Technician Notes:</h4>
+    @if (Model.TSTTechNotes.Count > 0)
+    {
+        foreach (var note in Model.TSTTechNotes)
+        {
+            <div>
+                <p>
+                    Technician Note by <strong>@note.TSTEmployee.FullName</strong> on <strong>@string.Format("{0:g}", note.NotationDate)</strong>
+                    <br />
+                    @note.Notation
+                </p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No notes currently for this ticket.</p>
+    }
+</div>
+
+<div class="article">
+    <h2>Edit</h2>
+
+
+    @using (Html.BeginForm("Edit", "Tickets", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>TSTTicket</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.TicketID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketStatusID, "TicketStatusID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TicketStatusID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TicketStatusID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketSubject, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TicketSubject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TicketSubject, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TicketDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TicketDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.SubmittedDate)
+            @Html.HiddenFor(model => model.SubmittedByID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ResolvedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ResolvedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ResolvedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.TechID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Attachment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Priority, "Priority", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Priority", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+<div class="article">
+
+    <div id="addNote">
+        <h4>Add Tech Note</h4>
+        <p><textarea id="noteText"></textarea></p>
+        <p><input type="button" value="Add Note" id="btnAddNote" class="btn btn-success" /></p>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $('#btnAddNote').click(function () {
+                //console.log("You just clicked a button");
+                var note = $("#noteText").val();
+
+                //when adding the note (during the async call), add this note information to the notes div
+                //also clear the notes textarea
+                $.ajax({
+                    url: "/Tickets/AddTechNote?ticketId=@Model.TicketID&note="
+                    + note, success: function (data) {
+                        //display the new note info at the bottom of the notes div. There is not formatting here. UI
+                        //is unaware of what is happening
+
+                        $("#notes").append("<p> Technician Note by <strong>" + data.Tech + "</strong> on <strong>" + data.Date + "</strong><br />"
+                            + data.TechNotes + "</p>");
+                    }
+                })
+            });
+        });
+    </script>
+}

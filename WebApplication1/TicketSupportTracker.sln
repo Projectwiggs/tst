@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSupportTracker.UI.MVC", "WebApplication1\TicketSupportTracker.UI.MVC.csproj", "{52681454-C5B1-4FB8-9B6E-3CB903D9CDAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSupportTracker.DATA.EF", "TST.EF\TicketSupportTracker.DATA.EF.csproj", "{CDD91E5B-F6F3-4385-8A73-1E6D2A58BDEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52681454-C5B1-4FB8-9B6E-3CB903D9CDAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52681454-C5B1-4FB8-9B6E-3CB903D9CDAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52681454-C5B1-4FB8-9B6E-3CB903D9CDAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52681454-C5B1-4FB8-9B6E-3CB903D9CDAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD91E5B-F6F3-4385-8A73-1E6D2A58BDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD91E5B-F6F3-4385-8A73-1E6D2A58BDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD91E5B-F6F3-4385-8A73-1E6D2A58BDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD91E5B-F6F3-4385-8A73-1E6D2A58BDEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

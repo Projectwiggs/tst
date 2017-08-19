@@ -1,0 +1,48 @@
+﻿@model TST.EF.TSTTicket
+
+@{
+    ViewBag.Title = "Close";
+}
+
+<div class="article">
+    <h4>Are you sure you want this ticket @ViewBag.TStatus.Name.ToLower()?</h4>
+    <div class="centered">
+        <h5>Editing is not allowed afterwards</h5>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketSubject)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TicketSubject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SubmittedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SubmittedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTEmployee.FullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTEmployee.FullName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("No", "Index", null, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Yes", "CloseConfirmed", new { id = Model.TicketID, statusId = ViewBag.TStatus.TicketStatusID }, new { @class = "btn btn-success" })
+            </div>
+        }
+    </div>
+</div>

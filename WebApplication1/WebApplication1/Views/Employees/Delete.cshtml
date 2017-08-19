@@ -1,0 +1,73 @@
+﻿@model TST.EF.TSTEmployee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="article">
+    <h3>Are you sure you want to @(Model.IsActive ? "deactivate" : "activate") this employee?</h3>
+    <div>
+        <dl class="dl-horizontal">
+
+            @Html.HiddenFor(model => model.EmployeeID)
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FullName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTDepartment.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTDepartment.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HireDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HireDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("Go Back", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Delete" class="btn btn-danger float-right" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,10 @@
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\bin\Debug\TST.EF.dll.config
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\bin\Debug\TST.EF.dll
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\bin\Debug\TST.EF.pdb
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\bin\Debug\EntityFramework.dll
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\bin\Debug\EntityFramework.xml
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\obj\Debug\TST.EF.dll
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\obj\Debug\TST.EF.pdb
+C:\Users\Student\Documents\Visual Studio 2015\Projects\TwoWeeksProjects\WebApplication1\TST.EF\obj\Debug\TicketSupportTracker.DATA.EF.csprojResolveAssemblyReference.cache

@@ -1,0 +1,894 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TSTProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketStatuses">
+          <Key>
+            <PropertyRef Name="TicketStatusID" />
+          </Key>
+          <Property Name="TicketStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TSTDepartments">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TSTEmployees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DeptID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EmployeeStatusID" Type="int" Nullable="false" />
+          <Property Name="HireDate" Type="date" Nullable="false" />
+          <Property Name="SeparationDate" Type="date" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="150" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="150" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="15" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="10" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="EmpPhoto" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="TSTEmployeeStatuses">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TSTTechNotes">
+          <Key>
+            <PropertyRef Name="NotationID" />
+          </Key>
+          <Property Name="NotationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Notation" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TechID" Type="int" Nullable="false" />
+          <Property Name="TicketID" Type="int" Nullable="false" />
+          <Property Name="NotationDate" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TSTTicketPriorities">
+          <Key>
+            <PropertyRef Name="PriorityID" />
+          </Key>
+          <Property Name="PriorityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TSTTickets">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketStatusID" Type="int" Nullable="false" />
+          <Property Name="TicketSubject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TicketDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SubmittedDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="ResolvedDate" Type="smalldatetime" />
+          <Property Name="SubmittedByID" Type="int" Nullable="false" />
+          <Property Name="TechID" Type="int" />
+          <Property Name="Attachment" Type="nvarchar" MaxLength="250" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTEmployees_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="TSTEmployees" Type="Self.TSTEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TSTEmployees">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTEmployees_TSTDepartments">
+          <End Role="TSTDepartments" Type="Self.TSTDepartments" Multiplicity="1" />
+          <End Role="TSTEmployees" Type="Self.TSTEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTDepartments">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="TSTEmployees">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTEmployees_TSTEmployeeStatuses">
+          <End Role="TSTEmployeeStatuses" Type="Self.TSTEmployeeStatuses" Multiplicity="1" />
+          <End Role="TSTEmployees" Type="Self.TSTEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployeeStatuses">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="TSTEmployees">
+              <PropertyRef Name="EmployeeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTechNotes_TSTEmployees">
+          <End Role="TSTEmployees" Type="Self.TSTEmployees" Multiplicity="1" />
+          <End Role="TSTTechNotes" Type="Self.TSTTechNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TSTTechNotes">
+              <PropertyRef Name="TechID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTechNotes_TSTTickets">
+          <End Role="TSTTickets" Type="Self.TSTTickets" Multiplicity="1" />
+          <End Role="TSTTechNotes" Type="Self.TSTTechNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTTickets">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TSTTechNotes">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TicketStatuses">
+          <End Role="TicketStatuses" Type="Self.TicketStatuses" Multiplicity="1" />
+          <End Role="TSTTickets" Type="Self.TSTTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketStatuses">
+              <PropertyRef Name="TicketStatusID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="TicketStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TSTEmployees">
+          <End Role="TSTEmployees" Type="Self.TSTEmployees" Multiplicity="1" />
+          <End Role="TSTTickets" Type="Self.TSTTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="SubmittedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TSTEmployees1">
+          <End Role="TSTEmployees" Type="Self.TSTEmployees" Multiplicity="0..1" />
+          <End Role="TSTTickets" Type="Self.TSTTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="TechID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TSTTicketPriorities">
+          <End Role="TSTTicketPriorities" Type="Self.TSTTicketPriorities" Multiplicity="1" />
+          <End Role="TSTTickets" Type="Self.TSTTickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTTicketPriorities">
+              <PropertyRef Name="PriorityID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="Priority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TSTProjectModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketStatuses" EntityType="Self.TicketStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TSTDepartments" EntityType="Self.TSTDepartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TSTEmployees" EntityType="Self.TSTEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TSTEmployeeStatuses" EntityType="Self.TSTEmployeeStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TSTTechNotes" EntityType="Self.TSTTechNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TSTTicketPriorities" EntityType="Self.TSTTicketPriorities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TSTTickets" EntityType="Self.TSTTickets" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTEmployees_AspNetUsers" Association="Self.FK_TSTEmployees_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTEmployees_TSTDepartments" Association="Self.FK_TSTEmployees_TSTDepartments">
+            <End Role="TSTDepartments" EntitySet="TSTDepartments" />
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTEmployees_TSTEmployeeStatuses" Association="Self.FK_TSTEmployees_TSTEmployeeStatuses">
+            <End Role="TSTEmployeeStatuses" EntitySet="TSTEmployeeStatuses" />
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTechNotes_TSTEmployees" Association="Self.FK_TSTTechNotes_TSTEmployees">
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+            <End Role="TSTTechNotes" EntitySet="TSTTechNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTechNotes_TSTTickets" Association="Self.FK_TSTTechNotes_TSTTickets">
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+            <End Role="TSTTechNotes" EntitySet="TSTTechNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TicketStatuses" Association="Self.FK_TSTTickets_TicketStatuses">
+            <End Role="TicketStatuses" EntitySet="TicketStatuses" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TSTEmployees" Association="Self.FK_TSTTickets_TSTEmployees">
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TSTEmployees1" Association="Self.FK_TSTTickets_TSTEmployees1">
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TSTTicketPriorities" Association="Self.FK_TSTTickets_TSTTicketPriorities">
+            <End Role="TSTTicketPriorities" EntitySet="TSTTicketPriorities" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TSTProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="TSTEmployees" Relationship="Self.FK_TSTEmployees_AspNetUsers" FromRole="AspNetUsers" ToRole="TSTEmployees" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="TicketStatus">
+          <Key>
+            <PropertyRef Name="TicketStatusID" />
+          </Key>
+          <Property Name="TicketStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TSTTickets" Relationship="Self.FK_TSTTickets_TicketStatuses" FromRole="TicketStatuses" ToRole="TSTTickets" />
+        </EntityType>
+        <EntityType Name="TSTDepartment">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TSTEmployees" Relationship="Self.FK_TSTEmployees_TSTDepartments" FromRole="TSTDepartments" ToRole="TSTEmployees" />
+        </EntityType>
+        <EntityType Name="TSTEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeptID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EmployeeStatusID" Type="Int32" Nullable="false" />
+          <Property Name="HireDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SeparationDate" Type="DateTime" Precision="0" />
+          <Property Name="Address1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EmpPhoto" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_TSTEmployees_AspNetUsers" FromRole="TSTEmployees" ToRole="AspNetUsers" />
+          <NavigationProperty Name="TSTDepartment" Relationship="Self.FK_TSTEmployees_TSTDepartments" FromRole="TSTEmployees" ToRole="TSTDepartments" />
+          <NavigationProperty Name="TSTEmployeeStatus" Relationship="Self.FK_TSTEmployees_TSTEmployeeStatuses" FromRole="TSTEmployees" ToRole="TSTEmployeeStatuses" />
+          <NavigationProperty Name="TSTTechNotes" Relationship="Self.FK_TSTTechNotes_TSTEmployees" FromRole="TSTEmployees" ToRole="TSTTechNotes" />
+          <NavigationProperty Name="TSTTickets" Relationship="Self.FK_TSTTickets_TSTEmployees" FromRole="TSTEmployees" ToRole="TSTTickets" />
+          <NavigationProperty Name="TSTTickets1" Relationship="Self.FK_TSTTickets_TSTEmployees1" FromRole="TSTEmployees" ToRole="TSTTickets" />
+        </EntityType>
+        <EntityType Name="TSTEmployeeStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TSTEmployees" Relationship="Self.FK_TSTEmployees_TSTEmployeeStatuses" FromRole="TSTEmployeeStatuses" ToRole="TSTEmployees" />
+        </EntityType>
+        <EntityType Name="TSTTechNote">
+          <Key>
+            <PropertyRef Name="NotationID" />
+          </Key>
+          <Property Name="NotationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Notation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TechID" Type="Int32" Nullable="false" />
+          <Property Name="TicketID" Type="Int32" Nullable="false" />
+          <Property Name="NotationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TSTEmployee" Relationship="Self.FK_TSTTechNotes_TSTEmployees" FromRole="TSTTechNotes" ToRole="TSTEmployees" />
+          <NavigationProperty Name="TSTTicket" Relationship="Self.FK_TSTTechNotes_TSTTickets" FromRole="TSTTechNotes" ToRole="TSTTickets" />
+        </EntityType>
+        <EntityType Name="TSTTicketPriority">
+          <Key>
+            <PropertyRef Name="PriorityID" />
+          </Key>
+          <Property Name="PriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TSTTickets" Relationship="Self.FK_TSTTickets_TSTTicketPriorities" FromRole="TSTTicketPriorities" ToRole="TSTTickets" />
+        </EntityType>
+        <EntityType Name="TSTTicket">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketStatusID" Type="Int32" Nullable="false" />
+          <Property Name="TicketSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TicketDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubmittedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ResolvedDate" Type="DateTime" Precision="0" />
+          <Property Name="SubmittedByID" Type="Int32" Nullable="false" />
+          <Property Name="TechID" Type="Int32" />
+          <Property Name="Attachment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TicketStatus" Relationship="Self.FK_TSTTickets_TicketStatuses" FromRole="TSTTickets" ToRole="TicketStatuses" />
+          <NavigationProperty Name="TSTEmployee" Relationship="Self.FK_TSTTickets_TSTEmployees" FromRole="TSTTickets" ToRole="TSTEmployees" />
+          <NavigationProperty Name="TSTEmployee1" Relationship="Self.FK_TSTTickets_TSTEmployees1" FromRole="TSTTickets" ToRole="TSTEmployees" />
+          <NavigationProperty Name="TSTTechNotes" Relationship="Self.FK_TSTTechNotes_TSTTickets" FromRole="TSTTickets" ToRole="TSTTechNotes" />
+          <NavigationProperty Name="TSTTicketPriority" Relationship="Self.FK_TSTTickets_TSTTicketPriorities" FromRole="TSTTickets" ToRole="TSTTicketPriorities" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTEmployees_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TSTEmployees">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TicketStatuses">
+          <End Role="TicketStatuses" Type="Self.TicketStatus" Multiplicity="1" />
+          <End Role="TSTTickets" Type="Self.TSTTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketStatuses">
+              <PropertyRef Name="TicketStatusID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="TicketStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTEmployees_TSTDepartments">
+          <End Role="TSTDepartments" Type="Self.TSTDepartment" Multiplicity="1" />
+          <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTDepartments">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="TSTEmployees">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTEmployees_TSTEmployeeStatuses">
+          <End Role="TSTEmployeeStatuses" Type="Self.TSTEmployeeStatus" Multiplicity="1" />
+          <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployeeStatuses">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="TSTEmployees">
+              <PropertyRef Name="EmployeeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTechNotes_TSTEmployees">
+          <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="1" />
+          <End Role="TSTTechNotes" Type="Self.TSTTechNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TSTTechNotes">
+              <PropertyRef Name="TechID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TSTEmployees">
+          <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="1" />
+          <End Role="TSTTickets" Type="Self.TSTTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="SubmittedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TSTEmployees1">
+          <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="0..1" />
+          <End Role="TSTTickets" Type="Self.TSTTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="TechID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTechNotes_TSTTickets">
+          <End Role="TSTTickets" Type="Self.TSTTicket" Multiplicity="1" />
+          <End Role="TSTTechNotes" Type="Self.TSTTechNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTTickets">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TSTTechNotes">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSTTickets_TSTTicketPriorities">
+          <End Role="TSTTicketPriorities" Type="Self.TSTTicketPriority" Multiplicity="1" />
+          <End Role="TSTTickets" Type="Self.TSTTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TSTTicketPriorities">
+              <PropertyRef Name="PriorityID" />
+            </Principal>
+            <Dependent Role="TSTTickets">
+              <PropertyRef Name="Priority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TSTProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="TicketStatuses" EntityType="Self.TicketStatus" />
+          <EntitySet Name="TSTDepartments" EntityType="Self.TSTDepartment" />
+          <EntitySet Name="TSTEmployees" EntityType="Self.TSTEmployee" />
+          <EntitySet Name="TSTEmployeeStatuses" EntityType="Self.TSTEmployeeStatus" />
+          <EntitySet Name="TSTTechNotes" EntityType="Self.TSTTechNote" />
+          <EntitySet Name="TSTTicketPriorities" EntityType="Self.TSTTicketPriority" />
+          <EntitySet Name="TSTTickets" EntityType="Self.TSTTicket" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTEmployees_AspNetUsers" Association="Self.FK_TSTEmployees_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TicketStatuses" Association="Self.FK_TSTTickets_TicketStatuses">
+            <End Role="TicketStatuses" EntitySet="TicketStatuses" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTEmployees_TSTDepartments" Association="Self.FK_TSTEmployees_TSTDepartments">
+            <End Role="TSTDepartments" EntitySet="TSTDepartments" />
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTEmployees_TSTEmployeeStatuses" Association="Self.FK_TSTEmployees_TSTEmployeeStatuses">
+            <End Role="TSTEmployeeStatuses" EntitySet="TSTEmployeeStatuses" />
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTechNotes_TSTEmployees" Association="Self.FK_TSTTechNotes_TSTEmployees">
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+            <End Role="TSTTechNotes" EntitySet="TSTTechNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TSTEmployees" Association="Self.FK_TSTTickets_TSTEmployees">
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TSTEmployees1" Association="Self.FK_TSTTickets_TSTEmployees1">
+            <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTechNotes_TSTTickets" Association="Self.FK_TSTTechNotes_TSTTickets">
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+            <End Role="TSTTechNotes" EntitySet="TSTTechNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSTTickets_TSTTicketPriorities" Association="Self.FK_TSTTickets_TSTTicketPriorities">
+            <End Role="TSTTicketPriorities" EntitySet="TSTTicketPriorities" />
+            <End Role="TSTTickets" EntitySet="TSTTickets" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TSTProjectModelStoreContainer" CdmEntityContainer="TSTProjectEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="TSTProjectModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="TSTProjectModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="TSTProjectModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="TSTProjectModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketStatuses">
+            <EntityTypeMapping TypeName="TSTProjectModel.TicketStatus">
+              <MappingFragment StoreEntitySet="TicketStatuses">
+                <ScalarProperty Name="TicketStatusID" ColumnName="TicketStatusID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSTDepartments">
+            <EntityTypeMapping TypeName="TSTProjectModel.TSTDepartment">
+              <MappingFragment StoreEntitySet="TSTDepartments">
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSTEmployees">
+            <EntityTypeMapping TypeName="TSTProjectModel.TSTEmployee">
+              <MappingFragment StoreEntitySet="TSTEmployees">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EmployeeStatusID" ColumnName="EmployeeStatusID" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="SeparationDate" ColumnName="SeparationDate" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EmpPhoto" ColumnName="EmpPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSTEmployeeStatuses">
+            <EntityTypeMapping TypeName="TSTProjectModel.TSTEmployeeStatus">
+              <MappingFragment StoreEntitySet="TSTEmployeeStatuses">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSTTechNotes">
+            <EntityTypeMapping TypeName="TSTProjectModel.TSTTechNote">
+              <MappingFragment StoreEntitySet="TSTTechNotes">
+                <ScalarProperty Name="NotationID" ColumnName="NotationID" />
+                <ScalarProperty Name="Notation" ColumnName="Notation" />
+                <ScalarProperty Name="TechID" ColumnName="TechID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="NotationDate" ColumnName="NotationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSTTicketPriorities">
+            <EntityTypeMapping TypeName="TSTProjectModel.TSTTicketPriority">
+              <MappingFragment StoreEntitySet="TSTTicketPriorities">
+                <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSTTickets">
+            <EntityTypeMapping TypeName="TSTProjectModel.TSTTicket">
+              <MappingFragment StoreEntitySet="TSTTickets">
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="TicketStatusID" ColumnName="TicketStatusID" />
+                <ScalarProperty Name="TicketSubject" ColumnName="TicketSubject" />
+                <ScalarProperty Name="TicketDescription" ColumnName="TicketDescription" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+                <ScalarProperty Name="SubmittedByID" ColumnName="SubmittedByID" />
+                <ScalarProperty Name="TechID" ColumnName="TechID" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="TSTProjectModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="da52d92ccbd3430cbbeddee7a16a3f0c" Name="Diagram1">
+        <EntityTypeShape EntityType="TSTProjectModel.AspNetRole" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.AspNetUser" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.TicketStatus" Width="1.5" PointX="11.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.TSTDepartment" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.TSTEmployee" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.TSTEmployeeStatus" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.TSTTechNote" Width="1.5" PointX="10.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.TSTTicketPriority" Width="1.5" PointX="11.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="TSTProjectModel.TSTTicket" Width="1.5" PointX="13.5" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="TSTProjectModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTEmployees_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTTickets_TicketStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTEmployees_TSTDepartments" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTEmployees_TSTEmployeeStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTTechNotes_TSTEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTTickets_TSTEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTTickets_TSTEmployees1" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTTechNotes_TSTTickets" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.FK_TSTTickets_TSTTicketPriorities" ManuallyRouted="false" />
+        <AssociationConnector Association="TSTProjectModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

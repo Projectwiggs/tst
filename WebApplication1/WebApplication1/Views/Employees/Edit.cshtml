@@ -1,0 +1,218 @@
+﻿@model TST.EF.TSTEmployee
+
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="article">
+    @using (Html.BeginForm("Edit", "Employees", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="employee-details">
+            <div class="float-left employee-details-left">
+                <h2 class="editor">@Html.EditorFor(e => e.FName, new { htmlattributes = new { @class = "titleName" } }) @Html.EditorFor(m => m.LName, new { htmlattributes = new { @class = "titleName" } })</h2>
+                <div class="container">
+                    <input type="file" id="upload" style="visibility:hidden" name="empImage" />
+                    @Html.HiddenFor(m => m.EmpPhoto)
+                    @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+                    {
+                        <a class="overlay overlay-editor" href="#" onclick="$('#upload').click()"><div>Upload Photo</div></a>
+                    }
+                    <img src="@Url.Content("~/Content/images/employees/" + Model.EmpPhoto)" class="employee-details-img" />
+                </div>
+            </div>
+            <div class="float-left employee-details-right">
+                @Html.HiddenFor(m => m.EmployeeID)
+                <table>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.JobTitle)
+                            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+                        </td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+                        {
+                            <td>@Html.EditorFor(m => m.JobTitle)</td>
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(model => model.JobTitle)
+                            <td>@Model.JobTitle</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.HireDate)
+                            @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
+                        </td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+                        {
+                            <td>@Html.EditorFor(m => m.HireDate, new { htmlattributes = new { @class = "datepicker" } })</td>
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(model => model.HireDate)
+                            <td>@Html.DisplayFor(m => m.HireDate)</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.SeparationDate)
+                            @Html.ValidationMessageFor(model => model.SeparationDate, "", new { @class = "text-danger" })
+                        </td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+                        {
+                            <td>@Html.EditorFor(m => m.SeparationDate, new { htmlattributes = new { @class = "datepicker" } })</td>
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(model => model.SeparationDate)
+                            <td>@Html.DisplayFor(m => m.SeparationDate)</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.Phone)
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </td>
+                        <td>@Html.EditorFor(m => m.Phone)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.Email)
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </td>
+                        <td>@Html.EditorFor(m => m.Email)</td>
+                    </tr>
+                </table>
+                <br />
+                <table>
+                    <caption>Only You and the Admins can see the information below.</caption>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.Address1)
+                            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                        </td>
+                        <td>@Html.EditorFor(m => m.Address1)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.Address2)
+                            @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>@Html.EditorFor(m => m.Address2)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.City)
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </td>
+                        <td>@Html.EditorFor(m => m.City)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.State)
+                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                        </td>
+                        <td>@Html.EditorFor(m => m.State)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.Zip)
+                            @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
+                        </td>
+                        <td>@Html.EditorFor(m => m.Zip)</td>
+                    </tr>
+                </table>
+
+
+            </div>
+            <div class="clear"></div>
+            @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+                {
+                <table class="float-left employee-details-bottom">
+                    <caption>Admin/Technician Content</caption>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.IsActive)
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(m => m.IsActive)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(m => m.UserID)
+                            @Html.HiddenFor(u => u.UserID)
+                            @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(m => m.AspNetUser.UserName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => m.EmployeeStatusID)
+                            @Html.ValidationMessageFor(model => model.EmployeeStatusID, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("EmployeeStatusID")
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(m => m.DeptID)
+                            @Html.ValidationMessageFor(model => model.DeptID, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("DeptID")
+                        </td>
+                    </tr>
+                </table>
+            }
+            <div class="clear"></div>
+
+            <div class="float bottom-links">
+                @Html.ActionLink("Back", "Details", new { RawID = Model.EmployeeID }, new { @class = "btn btn-danger" })
+                <input type="submit" value="Update" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+{
+    <script>
+        $(function () {
+            var table;
+            $("#AspNetUser_UserName").autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Employees/GetEmails",
+                        type: "POST",
+                        dataType: "json",
+                        data: { prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item[1], value: item[0] };
+                            }))
+                        }
+                    });
+                },
+                focus: function (event, ui) {
+                    $("#AspNetUser_UserName").val(ui.item.label);
+                    return false;
+                },
+                select: function (event, ui) {
+                    console.log(ui)
+                    $("#UserID").val(ui.item.value);
+                    $("#AspNetUser_UserName").val(ui.item.label);
+
+                    return false;
+                }
+            })
+        });
+    </script>
+}

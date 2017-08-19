@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Industries - @ViewBag.Title</title>
+    <link rel="icon" href="~/Content/images/radar.ico" type="image/x-icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/styles.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Content/js/bootstrap-hover-dropdown.min.js"></script>
+
+
+
+</head>
+<body data-spy="scroll" data-target=".main-navigation" data-offset="50">
+    <div id="page-extent"></div>
+    <div id="header">
+        <div id="top-header">
+            <div id="company-logo">
+                <a href="~/Home/Index">
+                    <img src="~/Content/images/logo-1.png" alt="Radar Industries" id="logo" />
+                    <h2>The Best Radars in the Galaxy</h2>
+                </a>
+            </div>
+
+        </div>
+        <ul class="main-navigation" data-spy="affix" data-offset-top="102">
+            <li class="first">@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="first">@Html.ActionLink("About", "About", "Home")</li>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+            }
+            <li class="dropdown">
+                <a class="glyphicons glyphicons-shield dropdown" data-hover="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Support
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Tickets", "Index", "Tickets")</li>
+                    }
+                </ul>
+            </li>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <li class="dropdown">
+                    <a class="glyphicons glyphicons-shield dropdown" data-hover="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Admin
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink("Users", "Index", "UsersAdmin")</li>
+                    </ul>
+                </li>
+            }
+            <li class="navbar-right">@Html.Partial("_LoginPartial")</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div id="content">
+        @RenderBody()
+    </div>
+    <div id="footer">
+        <div class="footerlink">
+            <p class="lf">Copyright &copy; @DateTime.Now.Year @Html.ActionLink("Radar Industries", "Index", "Home") - All Rights Reserved</p>
+        </div>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/js/siteJS.js"></script>
+
+</body>
+</html>

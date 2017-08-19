@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TST.EF.TSTDepartment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="article">
+    <h2>Departments</h2>
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+    {
+        <p>
+            @Html.ActionLink("New Department", "Create")
+        </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Employees
+            </th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th></th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+            {
+            <tr class="@(item.IsActive == false ? "inactive" : "")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TSTEmployees.Count)
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <div class="dropdown float-right">
+                            <a class="glyphicon glyphicon-option-vertical dropdown" data-hover="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></a>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                <li> @Html.ActionLink("Edit", "Edit", new { id = item.DeptId }) </li>
+                                <li> @Html.ActionLink(item.IsActive ? "Deactivate" : "Activate", "Delete", new { id = item.DeptId }) </li>
+                            </ul>
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>

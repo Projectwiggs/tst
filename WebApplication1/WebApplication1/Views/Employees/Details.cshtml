@@ -1,0 +1,96 @@
+﻿@model TST.EF.TSTEmployee
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="article">
+
+    <div class="bar-large absolute">
+        <a class="glyphicon glyphicon-arrow-left float-left" href="@Url.Action("Index")" title="Back to Index"></a>
+        @if (Model.Email == User.Identity.Name || User.IsInRole("Admin") || User.IsInRole("Technician"))
+        {
+            <div class="dropdown float-right">
+                <a class="glyphicon glyphicon-option-horizontal dropdown" data-hover="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                    <li>@Html.ActionLink("Edit Profile", "Edit", "Employees", new { id = Model.EmployeeID }, htmlAttributes: null)</li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+                {
+                        <li>@Html.ActionLink((Model.IsActive ? "Deactivate" : "Activate"), "Delete", "Employees", new { id = Model.EmployeeID }, htmlAttributes: null)</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="employee-details">
+        <div class="float-left employee-details-left">
+            <h2>@Model.FullName</h2>
+            <div class="container">
+                <img src="@Url.Content("~/Content/images/employees/"+Model.EmpPhoto)" class="employee-details-img @(Model.IsActive ? "" : "greyscale")" />
+            </div>
+        </div>
+        <div class="float-left employee-details-right">
+            <table>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.JobTitle)</td>
+                    <td>@Model.JobTitle</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.TSTDepartment.Name)</td>
+                    <td>@Model.TSTDepartment.Name</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.HireDate)</td>
+                    <td>@Html.DisplayFor(m => m.HireDate)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.SeparationDate)</td>
+                    <td>@Html.DisplayFor(m => m.SeparationDate)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.Phone)</td>
+                    <td>@Html.DisplayFor(m => m.Phone)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(m => m.Email)</td>
+                    <td>@Html.DisplayFor(m => m.Email)</td>
+                </tr>
+            </table>
+            <div class="clear"></div>
+            <br />
+            @if (Model.UserID == User.Identity.GetUserId() || User.IsInRole("Admin") || User.IsInRole("Technician"))
+            {
+                <table>
+                    <caption>Only You and the Admins can see the information below.</caption>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Address1)</td>
+                        <td>@Html.DisplayFor(m => m.Address1)</td>
+                    </tr>
+                    @if (!string.IsNullOrEmpty(Model.Address2))
+                    {
+                        <tr>
+                            <td>@Html.DisplayNameFor(m => m.Address2)</td>
+                            <td>@Html.DisplayFor(m => m.Address2)</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.City)</td>
+                        <td>@Html.DisplayFor(m => m.City)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.State)</td>
+                        <td>@Html.DisplayFor(m => m.State)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Zip)</td>
+                        <td>@Html.DisplayFor(m => m.Zip)</td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+</div>

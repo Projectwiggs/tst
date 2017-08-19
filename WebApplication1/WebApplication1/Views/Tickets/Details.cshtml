@@ -1,0 +1,212 @@
+﻿@model TST.EF.TSTTicket
+
+@{
+    ViewBag.Title = "Ticket Details";
+}
+
+<div class="article" id="notes">
+    <h4>Technician Notes:</h4>
+    @if (Model.TSTTechNotes.Count > 0)
+    {
+        foreach (var note in Model.TSTTechNotes)
+        {
+            <div>
+                <p>
+                    Technician Note by <strong>@note.TSTEmployee.FullName</strong> on <strong>@string.Format("{0:g}", note.NotationDate)</strong>
+                    <br />
+                    @note.Notation
+                </p>
+            </div>
+        }
+    }
+    else
+    {
+        <p id="none">No notes currently for this ticket.</p>
+    }
+</div>
+
+<div class="article">
+    <div class="bar-large absolute">
+        <a class="glyphicon glyphicon-arrow-left float-left" href="@Url.Action("Index")" title="Back to Index"></a>
+        @if (!(Model.TicketStatusID == 3 || Model.TicketStatusID == 4 || Model.TicketStatusID == 5))
+        {
+            <div class="dropdown float-right">
+                <a class="glyphicon glyphicon-option-horizontal dropdown" data-hover="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                    @if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+                    {
+                        <li>@Html.ActionLink("Edit", "Edit", "Tickets", new { id = Model.TicketID }, htmlAttributes: null)</li>
+                        <li>@Html.ActionLink("Close", "Close", "Tickets", new { id = Model.TicketID, statusId = 3 }, htmlAttributes: null)</li>
+                        <li>@Html.ActionLink("Archive", "Close", "Tickets", new { id = Model.TicketID, statusId = 4 }, htmlAttributes: null)</li>
+                    }
+                    <li>@Html.ActionLink("Cancel", "Close", "Tickets", new { id = Model.TicketID, statusId = 5 }, htmlAttributes: null)</li>
+                </ul>
+            </div>
+        }
+    </div>
+    <h2>Details</h2>
+
+    <div class="details">
+        <hr />
+        <table>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.TSTEmployee.FullName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.TSTEmployee.FullName)
+                </td>
+
+                <td>
+                    Technician
+                </td>
+
+                <td id="tech">
+                    @if (Model.TechID == null)
+                    {
+                        <p>empty</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.TSTEmployee1.FullName)
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.TicketStatus.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.TicketStatus.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayNameFor(model => model.TSTTicketPriority.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.TSTTicketPriority.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.SubmittedDate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.SubmittedDate)
+                </td>
+
+
+                <td>
+                    @Html.DisplayNameFor(model => model.ResolvedDate)
+                </td>
+
+                <td>
+
+                    @if (Model.ResolvedDate == null)
+                    {
+                        <p>empty</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.ResolvedDate)
+                    }
+                </td>
+            </tr>
+        </table>
+        <table class="dl-horizontal description">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.TicketSubject)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.TicketSubject)
+                </td>
+            </tr>
+            <tr><td><br /></td></tr>
+            <tr>
+                <td class="ticketDescription">
+                    @Html.DisplayNameFor(model => model.TicketDescription)
+                </td>
+
+                <td>
+                    @Html.Raw(Model.TicketDescription)
+                </td>
+            </tr>
+            <tr>
+                @if (!string.IsNullOrEmpty(Model.Attachment))
+                {
+                    <td>
+                        @Html.DisplayNameFor(model => model.Attachment)
+                    </td>
+
+                    <td>
+                        <a href="@Url.Content("~/Content/attachments/" + Model.Attachment)" download>Download @Model.Attachment.Substring(Model.Attachment.LastIndexOf('.')).ToLower() File <span class="glyphicon glyphicon-download-alt"></span></a>
+
+                    </td>
+                }
+            </tr>
+        </table>
+        @if ((User.IsInRole("Admin") || User.IsInRole("Technician")) && !(Model.TicketStatusID == 3 || Model.TicketStatusID == 4 || Model.TicketStatusID == 5))
+        {
+            <div><a class="glyphicon glyphicon-comment float-right" id="comment" href="#commentDiv" title="Add Technical Note"></a></div>
+        }
+    </div>
+</div>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Technician"))
+{
+    <div class="article" id="commentDiv" style="visibility: hidden;">
+
+        <div id="addNote">
+            <h4>Add Technical Note</h4>
+            <p><textarea id="noteText"></textarea></p>
+            <p><input type="button" value="Add Note" id="btnAddNote" class="btn btn-success" /></p>
+        </div>
+    </div>
+}
+<script>
+
+    $('#comment').click(function () {
+        if (document.getElementById("commentDiv").style.visibility == "hidden") {
+            document.getElementById("commentDiv").style.visibility = ""
+        }
+        else {
+            document.getElementById("commentDiv").style.visibility = "hidden"
+        }
+
+    });
+
+    $(function () {
+
+        $('#btnAddNote').click(function () {
+            //console.log("You just clicked a button");
+            var note = $("#noteText").val();
+
+            //when adding the note (during the async call), add this note information to the notes div
+            //also clear the notes textarea
+            $.ajax({
+                url: "/Tickets/AddTechNote?ticketId=@Model.TicketID&note="
+                + note, success: function (data) {
+                    //display the new note info at the bottom of the notes div. There is not formatting here. UI
+                    //is unaware of what is happening
+                    console.log($('#notes').html())
+                    if (@Model.TSTTechNotes.Count == 0)
+                    {
+                        $("#notes").html("");
+                        $("#tech").html(data.Tech)
+                    }
+
+                    $("#notes").append("<p> Technician Note by <strong>" + data.Tech + "</strong> on <strong>" + data.Date + "</strong><br />"
+                        + data.TechNotes + "</p>");
+
+
+                }
+            })
+        });
+    });
+</script>
